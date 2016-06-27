@@ -24,12 +24,12 @@ And then add `"matriphe/bfs": "dev-master"` in your `require` section in your `c
 composer require "matriphe/bfs":"dev-master"
 ```
 
-Make sure you defien your package minimum compatibility is `dev`.
+Make sure you define your package minimum compatibility to `dev`.
 
 ## Code Example
 
 ```php
-<? 
+<?php
 
 use Matriphe\Bfs\Bfs;
 
