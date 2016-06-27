@@ -1,46 +1,68 @@
-# bfs-php
+# Matriphe/Bfs
 
-A very simple [breadth-first search](http://en.wikipedia.org/wiki/Breadth-first_search) implementation written in PHP. Nothing fancy: does what it says on the tin :)
+A very simple [breadth-first search](http://en.wikipedia.org/wiki/Breadth-first_search) implementation written in PHP. Forked from [lextoumbourou/bfs-php](https://github.com/lextoumbourou/bfs-php) and added some steroid.
 
 Requires PHP 5.4+
 
-## Docs
+## Installation
 
-    bool bfs(array $graph, mixed $start_node, mixed $end_node)
+Add this repository on your `composer.json` since this library is not registered in Packagist (yet).
 
-Return ```true``` if there's a connected path from ```$start_node``` to ```$end_node```. ```false``` otherwise.
+```json
+    "repositories":
+    [
+        {
+            "type": "vcs",
+            "url": "https://github.com/matriphe/bfs-php.git"
+        }
+    ]
+```
 
-    array bfs_path(array $graph, mixed $start_node, mixed $end_node)
+And then add `"matriphe/bfs": "dev-master"` in your `require` section in your `composer.json`, or simply run this command:
 
-Return a path as an array if there's a connected path from ```$start_node``` to ```$end_node```. ```false``` otherwise.
+```sh
+composer require "matriphe/bfs":"dev-master"
+```
 
-## Examples
+Make sure you defien your package minimum compatibility is `dev`.
 
-    <?php
+## Code Example
 
-    include 'bfs.php'
+```php
+<? 
 
-    $graph = [
-        'A' => ['B', 'C'],
-        'B' => ['A', 'D'],
-        'D' => ['B'],
-        'C' => ['A',],
-    ];
+use Matriphe\Bfs\Bfs;
 
-    bfs($graph, 'A', 'D'); // true
-    bfs($graph, 'A', 'G'); // false
-    print_r(bfs_path($graph, 'A', 'D')); // ['A', 'B', 'D']
+$bfs = new Bfs();
 
+$graph = [
+    'A' => ['B', 'C'],
+    'B' => ['A', 'D'],
+    'D' => ['B'],
+    'C' => ['A',],
+];
+
+// Check connection from $start_node to $end_node.
+// Return true if there's a connected path and return false otherwise.
+// bool $is_connected = $bfs->isConnected(array $graph, mixed $start_node, mixed $end_node);
+$is_connected = $bfs->isConnected($graph, 'A', 'D'); // return true
+$is_connected = $bfs->isConnected($graph, 'A', 'F'); // return false
+
+// Get path as an array if there's a connection between $start_node and $end_node.
+// Otherwise will return false.
+// array $bfs->getPath(array $graph, mixed $start_node, mixed $end_node)
+$path = $bfs->getPath($Graph, 'A', 'D'); // return ['A', 'B', 'D']
+$path = $bfs->getPath($Graph, 'A', 'E'); // return ['A', 'C', 'E']
+$path = $bfs->getPath($Graph, 'A', 'F'); // return false
+```
 
 ## Tests
 
-Firstly, download all the deps (just unittest)
+Just run this command
 
-    > php composer.phar update
-
-Run tests!
-
-    > vendor/bin/phpunit tests/unit.php
+```sh
+vendor/bin/phpunit
+```
 
 ## License
 
