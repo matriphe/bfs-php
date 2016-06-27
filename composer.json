@@ -1,5 +1,5 @@
 {
-    "name": "lextoumbourou/bfs",
+    "name": "matriphe/bfs",
     "description": "A very simple breadth-first search implementation written in PHP",
     "license": "MIT",
     "authors": [
